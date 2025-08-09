@@ -6,13 +6,17 @@ import joblib
 import pandas as pd
 import datetime
 import requests
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_DIR = os.path.join(BASE_DIR, "..", "saved_models")
 
 try:
-    regressor = joblib.load("../saved_models/yield_prediction_regressor.joblib")
-    ct_reg = joblib.load("../saved_models/yield_prediction_transformer.joblib")
-    classifier = joblib.load("../saved_models/crop_recommendation_classifier.joblib")
-    ct_cla = joblib.load("../saved_models/crop_recommendation_transformer.joblib")
-    le = joblib.load("../saved_models/crop_recommendation_labelencoder.joblib")
+    regressor = joblib.load(os.path.join(MODEL_DIR, "yield_prediction_regressor.joblib"))
+    ct_reg = joblib.load(os.path.join(MODEL_DIR, "yield_prediction_transformer.joblib"))
+    classifier = joblib.load(os.path.join(MODEL_DIR, "crop_recommendation_classifier.joblib"))
+    ct_cla = joblib.load(os.path.join(MODEL_DIR, "crop_recommendation_transformer.joblib"))
+    le = joblib.load(os.path.join(MODEL_DIR, "crop_recommendation_labelencoder.joblib"))
 except FileNotFoundError as e:
     raise SystemExit(f"Model file not found: {e}")
 
