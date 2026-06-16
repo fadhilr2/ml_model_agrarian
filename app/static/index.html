@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agrarian Models Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="background-animation"></div>
+    
+    <div class="container">
+        <header>
+            <h1>Agrarian Models</h1>
+            <p>Predict yield and discover the best crops with machine learning.</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-target="recommendation-panel">Crop Recommendation</button>
+            <button class="tab-btn" data-target="yield-panel">Yield Prediction</button>
+        </div>
+
+        <main>
+            <!-- Crop Recommendation Panel -->
+            <section id="recommendation-panel" class="panel active">
+                <h2>Find Your Best Crop</h2>
+                <form id="recommendation-form">
+                    <div class="form-group">
+                        <label for="rec-tingkat">Tingkat Komitmen (Commitment Level)</label>
+                        <select id="rec-tingkat" required>
+                            <option value="Rendah">Rendah</option>
+                            <option value="Sedang">Sedang</option>
+                            <option value="Tinggi">Tinggi</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="rec-lat">Latitude</label>
+                            <input type="number" step="any" id="rec-lat" value="-6.2088" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="rec-lon">Longitude</label>
+                            <input type="number" step="any" id="rec-lon" value="106.8456" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rec-sun">Sun Exposure</label>
+                        <select id="rec-sun" required>
+                            <option value="Full Sun">Full Sun</option>
+                            <option value="Partial Shade">Partial Shade</option>
+                            <option value="Full Shade">Full Shade</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rec-area">Area (sq meters)</label>
+                        <input type="number" id="rec-area" value="1000" required>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Get Recommendation</button>
+                </form>
+
+                <div id="rec-result" class="result-box hidden">
+                    <h3>Recommended Crop:</h3>
+                    <p id="rec-output" class="highlight-text">-</p>
+                </div>
+            </section>
+
+            <!-- Yield Prediction Panel -->
+            <section id="yield-panel" class="panel hidden">
+                <h2>Predict Crop Yield</h2>
+                <form id="yield-form">
+                    <div class="form-group">
+                        <label for="yield-plant">Plant Name</label>
+                        <select id="yield-plant" required>
+                            <option value="Potatoes">Potatoes</option>
+                            <option value="Tomatoes">Tomatoes</option>
+                            <option value="Maize">Maize</option>
+                            <option value="Rice">Rice (Warning: Check Model Support)</option>
+                            <!-- NOTE: Will handle category support in JS if needed -->
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="yield-base-temp">Base Temperature (°C)</label>
+                            <input type="number" id="yield-base-temp" value="10" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="yield-growing-days">Growing Days</label>
+                            <input type="number" id="yield-growing-days" value="120" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="yield-lat">Latitude</label>
+                            <input type="number" step="any" id="yield-lat" value="-6.2088" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="yield-lon">Longitude</label>
+                            <input type="number" step="any" id="yield-lon" value="106.8456" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="yield-start">Start Date (YYYY-MM-DD)</label>
+                            <input type="date" id="yield-start" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="yield-area">Area (sq meters)</label>
+                            <input type="number" id="yield-area" value="1000" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Predict Yield</button>
+                </form>
+
+                <div id="yield-result" class="result-box hidden">
+                    <h3>Predicted Yield:</h3>
+                    <p id="yield-output" class="highlight-text">-</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Loader -->
+    <div id="loader" class="loader-overlay hidden">
+        <div class="spinner"></div>
+        <p>Processing ML Models...</p>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

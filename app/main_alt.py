@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.encoders import jsonable_encoder
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import joblib
 import pandas as pd
@@ -23,9 +24,11 @@ except FileNotFoundError as e:
 
 app = FastAPI()
 
+app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "static")), name="static")
+
 @app.get("/")
 def root():
-    return {"status": "API is running"}
+    return FileResponse(os.path.join(BASE_DIR, "static", "index.html"))
 
 
 class Input(BaseModel):
